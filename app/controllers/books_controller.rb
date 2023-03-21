@@ -25,12 +25,18 @@ class BooksController < ApplicationController
   end
 
   def update
-    book = find(params[:id])
-    book.update(list_params)
-    redirect_to book_path(iist.id)
+    book = Book.find(params[:id])
+    book.update(book_params)
+    redirect_to book_path(book.id)
+    end
+
+    def destroy
+      book = Book.find(params[:id])
+      book.delete
+      redirect_to '/books'
+    end
 
 
-  end
 
 
 
