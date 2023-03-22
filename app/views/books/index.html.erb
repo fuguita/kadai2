@@ -1,24 +1,54 @@
+<body>
 <h1>Books</h1>
 
+<table>
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Body</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
 
+  <tbody>
 <% @books.each do |book| %>
-<div class="list-item">
 
-  <div class="list-title">
-    <h2>Title</h2>
- <span><%= book.title %></span>
- </div>
+  <tr>
+    <th><%= book.title %></th>
+    <th><%= book.body %></th>
+ <th><%= link_to 'show', book_path(book.id) %></th>
+  <th><%= link_to 'edit', edit_book_path(book.id) %></th>
+  <th><%= link_to 'destroy', book_path(book.id), method: :delete, "deta-confirms" => "Are you sure?" %></th>
 
-  <div class="list-body">
-    <h2>Body</h2>
-  <span><%= book.body %></span>
-  </div>
+ </tr>
+<% end %>
+
+</tbody>
+
+</table>
+
+
+<div class="New-Book">
+  <h2>New Book</h2>
+
+<%= form_with model: @book do |f| %>
+
+<div class="field">
+<label for="book_tittle">Title</label><br>
+<%= f.text_field :title %><br>
 </div>
-<%= link_to 'show', book_path(book.id) %>
-<%= link_to 'edit', edit_book_path(book.id) %>
-<%= link_to 'destroy', books_path(book.id), method: :delete, "deta-confirms" => "Are you sure?" %>
+
+<div class="field">
+  <label for="book_body">Body</label><br>
+<%= f.text_area :body %>
+</div>
+<br>
+<%= f.submit :'Create book' %>
 
 <% end %>
+</div>
+
+</body>
 
 
 
